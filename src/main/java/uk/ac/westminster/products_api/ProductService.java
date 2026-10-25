@@ -11,11 +11,24 @@ public class ProductService {
     private List<Product> products = new ArrayList<>();
     private Long nextId = 1L;
 
-    /* public ProductService(){
-            System.out.println("ProductService constructor executed");
-            products.add(new DigitalProduct(nextId**, name"E-book",
+    public ProductService(){
+        products.add(new DigitalProduct(
+                nextId++,
+                "Clean Code (E-book)",
+                29.99,
+                "/downloads/clean-code.pdf",
+                4.2)
+        );
+        products.add(new PhysicalProduct(
+                nextId++,
+                "27-inch Monitor",
+                249.99,
+                5.4,
+                "61cm x 41cm x 18cm")
+        );
+        }
 
-    */
+
     public List<Product> getAllProducts() {
         return products;
     }
@@ -32,6 +45,7 @@ public class ProductService {
 
 
     }
+    
     public void deleteProduct(Long id) {
         products.removeIf(p -> p.getId().equals(id));
     }
