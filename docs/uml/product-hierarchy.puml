@@ -1,37 +1,34 @@
 @startuml
-class Product {
- - id : Long
- - name : String
- - price : double
- + Product()
- + Product(id : Long, name : String, price : double)
- + getId() : Long
- + getName() : String
- + getPrice() : double
- + setId(id : Long) : void
- + setName(name : String) : void
- + setPrice(price : double) : void
+abstract class Product {
+    - id : Long
+    - name : String
+    - price : double
+    + {abstract} getSummary() : String
+    + getName() : String
+    + getPrice() : double
+}
+
+interface Discountable {
+    + applyDiscount(rate : double) : void
+    + getDiscountedPrice() : double
 }
 
 class DigitalProduct {
- - downloadUrl : String
- - fileSizeMB : double
- + DigitalProduct()
- + DigitalProduct(id : Long, name : String, price : double, downloadUrl : String, fileSizeMB : double)
- + getDownloadUrl() : String
- + getFileSizeMB() : double
+    - downloadUrl : String
+    - fileSizeMB : double
+    + getSummary() : String
+    + applyDiscount(rate : double) : void
 }
 
 class PhysicalProduct {
- - weightKg : double
- - dimensions : String
- + PhysicalProduct()
- + PhysicalProduct(id : Long, name : String, price : double, weightKg : double, dimensions : String)
- + getWeightKg() : double
- + getDimensions() : String
+    - weightKg : double
+    - dimensions : String
+    + getSummary() : String
+    + applyDiscount(rate : double) : void
 }
 
-' <|-- is the inheritance arrow. The PARENT goes on the left.
 Product <|-- DigitalProduct
 Product <|-- PhysicalProduct
+Discountable <|.. DigitalProduct
+Discountable <|.. PhysicalProduct
 @enduml
